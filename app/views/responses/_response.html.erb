@@ -1,0 +1,35 @@
+<div class="panel panel-default">
+
+  <div class="panel-heading">
+
+    <span class="badge"><%= response.votes.count %></span>
+    <%= response.user.username %>
+
+    <% if logged_in? %>
+    <div class="plusone pull-right">
+
+      <%= bootstrap_form_for Vote.new do |f| %>
+      <%= f.hidden_field :response_id, :value => response.id %>
+      <button type="submit" class="btn btn-default btn-xs">+1</button>
+      <% end %>
+
+    </div>
+    <% end %>
+
+    <div class="response pull-right">
+      <% if current_user == response.question.user %>
+      <%= bootstrap_form_for response.question do |f| %>
+      <input name="_method" type="hidden" value="patch">
+      <%= f.hidden_field :best_response_id, :value => response.id %>
+      <button type="submit" class="btn btn-default btn-xs">mark as best</button>
+      <% end %>
+      <% end %>
+    </div>
+
+  </div> <!-- end panel-heading -->
+
+  <div class="panel-body">
+    &ldquo;<%= response.body %>&rdquo;
+  </div> <!-- end panel-body -->
+
+</div> <!-- end panel -->

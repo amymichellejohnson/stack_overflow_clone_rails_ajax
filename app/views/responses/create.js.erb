@@ -1,0 +1,6 @@
+$('#new_response').remove();
+$('#add-response-btn').show();
+$('#responses-list').append('<%= j render(@response) %>');
+
+// above is magical way of doing below:
+// $('#responses-list').append('<%= j render 'responses/response', response: @response %>');
