@@ -1,9 +1,10 @@
 Smaug-Lavaflow, a Stack Overflow clone
 ======================================
 
-by Gabe Finch & Mike Goren
+by Amy Johnson & Gabe Finch & Mike Goren
 
 This is a simple Ruby/Rails Stack Overflow clone.
+Updated with AJAX!
 
 Installation
 ------------
