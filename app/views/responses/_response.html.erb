@@ -2,15 +2,15 @@
 
   <div class="panel-heading">
 
-    <span class="badge"><%= response.votes.count %></span>
+    <span class="badge" id="badge-<%= response.id %>"><%= response.votes.count %></span>
     <%= response.user.username %>
 
     <% if logged_in? %>
     <div class="plusone pull-right">
 
-      <%= bootstrap_form_for Vote.new do |f| %>
-      <%= f.hidden_field :response_id, :value => response.id %>
-      <button type="submit" class="btn btn-default btn-xs">+1</button>
+      <%= bootstrap_form_for Vote.new, remote: true do |f| %>
+        <%= f.hidden_field :response_id, :value => response.id %>
+        <button type="submit" class="btn btn-default btn-xs" id="vote-btn">+1</button>
       <% end %>
 
     </div>
@@ -18,11 +18,11 @@
 
     <div class="response pull-right">
       <% if current_user == response.question.user %>
-      <%= bootstrap_form_for response.question do |f| %>
-      <input name="_method" type="hidden" value="patch">
-      <%= f.hidden_field :best_response_id, :value => response.id %>
-      <button type="submit" class="btn btn-default btn-xs">mark as best</button>
-      <% end %>
+        <%= bootstrap_form_for response.question, remote: true do |f| %>
+          <input name="_method" type="hidden" value="patch">
+          <%= f.hidden_field :best_response_id, :value => response.id %>
+          <button type="submit" class="btn btn-default btn-xs">mark as best</button>
+        <% end %>
       <% end %>
     </div>
 

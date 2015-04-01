@@ -31,14 +31,10 @@ class QuestionsController < ApplicationController
             render :new
           end
           format.js do
-            render :error
+            render 'layouts/error'
           end
         end
-
-
       end
-    else
-      redirect_to users_path
     end
   end
 

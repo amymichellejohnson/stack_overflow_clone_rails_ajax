@@ -11,4 +11,10 @@ FactoryGirl.define do
     body('Press the power button.')
   end
 
+  factory(:vote) do
+    user
+    response
+    question
+  end
+
 end

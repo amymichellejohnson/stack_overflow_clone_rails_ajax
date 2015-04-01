@@ -20,8 +20,15 @@ class ResponsesController < ApplicationController
         end
       end
     else
-      flash[:error] = "Failure."
-      render :new
+      respond_to do |format|
+        format.html do
+          flash[:error] = "Failure."
+          render :new
+        end
+        format.js do
+          render 'layouts/error'
+        end
+      end
     end
   end
 

@@ -11,8 +11,8 @@
 </div>
 
 <div class="row">
+  <div class="col-sm-8 col-sm-offset-2 well" id="responses-display">
     <% if @question.responses.any? %>
-      <div class="col-sm-8 col-sm-offset-2 well" id="responses-display">
 
       <h4>Responses:</h4>
 
@@ -36,18 +36,17 @@
           </div>
         <% end %>
       </div>
-
-
       <% @question.responses.sort_by(&:vote_count).reverse.each do |response| %>
         <% unless response == @question.best_response %>
           <%= render 'responses/response', response: response %>
         <% end %> <!-- end unless -->
       <% end %> <!-- end each -->
 
+
       <div id="responses-list">
       </div>
-
-      </div> <!-- end col-sm-8 -->
+      
     <% end %> <!-- end if any responses -->
+  </div> <!-- end col-sm-8 -->
 
 </div> <!-- end row -->
