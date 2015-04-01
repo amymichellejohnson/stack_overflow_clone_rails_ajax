@@ -2,7 +2,6 @@ class ResponsesController < ApplicationController
 
   def new
     @question = Question.find(params[:question_id])
-    @user = @question.user
     @response = Response.new
   end
 
@@ -10,12 +9,26 @@ class ResponsesController < ApplicationController
     @response = current_user.responses.new(response_params)
     @response.question_id = params[:question_id]
     if @response.save
-      flash[:notice] = "Response added!"
-      UserMailer.responded(@response).deliver
-      redirect_to question_path(@response.question)
+      respond_to do |format|
+        format.html do
+          flash[:notice] = "Response added!"
+          UserMailer.responded(@response).deliver
+          redirect_to question_path(@response.question)
+        end
+        format.js do
+          UserMailer.responded(@response).deliver
+        end
+      end
     else
-      flash[:error] = "Failure."
-      render :new
+      respond_to do |format|
+        format.html do
+          flash[:error] = "Failure."
+          render :new
+        end
+        format.js do
+          render 'layouts/error'
+        end
+      end
     end
   end
 

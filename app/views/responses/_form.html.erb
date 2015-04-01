@@ -1,6 +1,6 @@
-<%= bootstrap_form_for([@question, @response]) do |f| %>
+<%= bootstrap_form_for([@question, @response], remote: true)  do |f| %>
   <div class="form-group">
     <%= f.text_area :body %>
   </div>
-  <%= f.submit %>
+  <%= f.submit id: "submit-response-btn", class: "btn btn-default" %>
 <% end %>

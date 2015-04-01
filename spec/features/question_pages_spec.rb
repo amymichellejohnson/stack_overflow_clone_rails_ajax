@@ -41,6 +41,7 @@ describe 'the deleting a question process' do
   it 'deletes a question', js: true do
     user = FactoryGirl.create(:user)
     question = FactoryGirl.create(:question, user: user)
+    login(user)
     visit root_path
     page.find("#delete_question_#{question.id}").trigger('click')
     expect(page).to_not have_content question.title

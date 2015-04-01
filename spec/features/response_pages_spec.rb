@@ -13,3 +13,16 @@ describe 'sending email on response' do
     ActionMailer::Base.deliveries.last.to.should eq [user.username]
   end
 end
+describe 'creating a response process' do
+  it 'displays the created response', js: true do
+    user = FactoryGirl.create(:user)
+    question = FactoryGirl.create(:question, user: user)
+    login(user)
+    visit question_path(question)
+    click_on 'Leave a response'
+    fill_in 'Body', with: 'foo'
+    click_button 'Create Response'
+    save_screenshot("file.png")
+    expect(page).to have_content "foo"
+  end
+end
